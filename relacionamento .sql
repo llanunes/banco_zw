@@ -12,6 +12,9 @@ SELECT * FROM tbl_materiais;
 SELECT * FROM tbl_materiais_catador;
 SELECT * FROM tbl_pedido;
 SELECT * FROM tbl_materiais_pedido;
+SELECT * FROM tbl_pedido_catador;
+
+select status FROM tbl_pedido;
 
 SELECT * FROM tbl_materiais_catador 
 WHERE id_materiais in (1,2) AND id_catador NOT IN(SELECT id_catador
@@ -25,12 +28,9 @@ WHERE id_materiais in (1,2) GROUP BY id_catador HAVING count(id_catador) >= (SEL
 
 SELECT count(*) as id FROM tbl_materiais where id in(1,2);
 
-
 SELECT id FROM tbl_catador;
 
 SELECT * FROM tbl_materiais_catador where id_materiais <> 1 and id_materiais <> 2;
-
-
 
 
 # retorna a data no formato brasileiro
@@ -173,7 +173,7 @@ SELECT tbl_endereco.id, tbl_endereco.latitude, tbl_endereco.longitude, tbl_ender
 FROM tbl_endereco
 WHERE ST_DISTANCE_SPHERE(POINT(-23.549294, -46.872740), POINT(latitude, longitude)) <= 10000 
 ORDER BY distance
-LIMIT 10;    
+LIMIT 10;																											
 
 
 SELECT tbl_catador.id as id_catador, ST_DISTANCE_SPHERE(POINT(-23.549294, -46.872740), POINT(latitude, longitude)) AS distance
@@ -197,7 +197,5 @@ GROUP BY id_catador, longitude, latitude HAVING count(id_catador) >= (SELECT cou
 ORDER BY distance
 LIMIT 10;
 
-
-
-
+SELECT foto
     

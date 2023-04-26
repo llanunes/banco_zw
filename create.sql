@@ -5,9 +5,10 @@ SHOW TABLES;
 
 CREATE TABLE tbl_usuario(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    telefone VARCHAR(16) NOT NULL,
     email VARCHAR(256) NOT NULL,
     senha VARCHAR(100) NOT NULL,
+    telefone VARCHAR(16) NOT NULL,
+    biografia VARCHAR(191),
     UNIQUE INDEX(id)
 );
 
@@ -60,6 +61,8 @@ CREATE TABLE tbl_endereco(
     estado VARCHAR(45) NOT NULL,
     cep VARCHAR(10) NOT NULL,
     complemento VARCHAR(45),
+    apelido VARCHAR(30),
+    numero VARCHAR(8),
     UNIQUE INDEX(id)
 );
 
@@ -95,6 +98,24 @@ CREATE TABLE tbl_materiais_catador(
 	UNIQUE INDEX(id)
 );
 
-ALTER TABLE tbl_endereco 
-ADD COLUMN latitude VARCHAR(10), 
-ADD COLUMN longitude VARCHAR(10);
+CREATE TABLE tbl_pedido(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    created_at DATE NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    
+);
+
+CREATE TABLE tbl_pedido_catador(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    distancia FLOAT NOT NULL,
+    id_pedido INT NOT NULL,
+    id_catador INT NOT NULL,
+    CONSTRAINT FK_pedido_pedido_catador
+		FOREIGN KEY(id_pedido)
+        REFERENCES tbl_pedido(id),
+    CONSTRAINT FK_catador_pedido_catador
+		FOREIGN KEY (id_catador)
+        REFERENCES tbl_catador(id),
+	UNIQUE INDEX(id)      
+);
+
